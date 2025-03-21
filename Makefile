@@ -3,10 +3,10 @@ NAME		= cub3D
 
 # 컴파일러 및 플래그
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -I./minilibx-linux -Imlx_linux -O3
+CFLAGS		= -Wall -Wextra -Werror -g -O3
 
 # 라이브러리 디렉토리
-LIBFT_DIR	= libft
+LIBFT_DIR	= Libft
 GNL_DIR		= get_next_line
 MLX_DIR		= minilibx-linux
 
@@ -46,8 +46,8 @@ all: $(NAME)
 
 # 실행 파일 빌드
 $(NAME): $(OBJS) $(LIBFT) $(GNL)
-	@$(MAKE) -C $(MLX_DIR)
-	@$(CC) $(CFLAGS) $(OBJS) -no-pie -Lmlx_linux -lmlx_Linux -L$(MLX_DIR) -lXext -lX11 -lm -lz -L $(LIBFT_DIR) -lft $(GNL) -o $(NAME)
+	@$(MAKE) -C $(MLX_DIR) 2>/dev/null || true
+	@$(CC) $(CFLAGS) $(OBJS) -no-pie -Wl,-rpath,./$(LIBFT_DIR) -I$(MLX_DIR) -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm -lz -L$(LIBFT_DIR) -lft $(GNL) -o $(NAME)
 	@echo "$(GREEN)$(NAME) created!$(DEFAULT)"
 
 # 오브젝트 파일 빌드
@@ -66,7 +66,7 @@ $(GNL): $(LIBFT)
 clean:
 	@$(MAKE) -C $(LIBFT_DIR) clean
 	@$(MAKE) -C $(GNL_DIR) clean
-	@$(MAKE) -C $(MLX_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean 2>/dev/null || true
 	@$(RM) $(OBJS)
 	@echo "$(YELLOW)object files deleted!$(DEFAULT)"
 

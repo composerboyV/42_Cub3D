@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:30:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/14 10:38:48 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/03/21 20:11:05 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include <stdlib.h>
 # include <math.h>
-# include <mlx.h>
+# include "./minilibx-linux/mlx.h"
 # include <stdio.h>
 # include <string.h>
 # include <unistd.h>
-# include "../libft/libft.h"
+# include "./Libft/libft.h"
 #include "./get_next_line/get_next_line.h"
 
 # define KEY_ESC 65307
