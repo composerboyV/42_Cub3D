@@ -3,6 +3,9 @@ SO ./test/images/SO.xpm
 WE ./test/images/WE.xpm
 EA ./test/images/EA.xpm
 
+F 220,100,0
+C 225,30,0
+
         1111111111111111111111111
         1000000000000000000000001
         1100000000000000000000001

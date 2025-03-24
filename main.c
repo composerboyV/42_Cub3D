@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/24 14:48:12 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/24 15:17:04 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,19 @@
 #include <string.h>
 #include "draw.h"
 #include <unistd.h>
+
+void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
 
 /* ------------------- 맵 파싱 관련 함수 ------------------- */
 
@@ -194,6 +207,7 @@ void init_map_nswe(t_game *game, char *line)
     }
 }
 
+
 void set_texture_paths(t_game *game, char *file_name)
 {
     int fd;
@@ -209,9 +223,7 @@ void set_texture_paths(t_game *game, char *file_name)
             init_map_nswe(game, line);
         free(line);
     }
-    
     close(fd);
-    
     // 텍스처 경로가 제대로 설정되었는지 확인
     printf("North texture: %s\n", game->map_info->north_texture);
     printf("South texture: %s\n", game->map_info->south_texture);
@@ -219,10 +231,67 @@ void set_texture_paths(t_game *game, char *file_name)
     printf("East texture: %s\n", game->map_info->east_texture);
 
     // 바닥과 천장 색상 설정 (기존과 동일)
-    game->map_info->floor_color = 0x00AAAAAA;
-    game->map_info->ceiling_color = 0x00BBDDFF;
+    // game->map_info->floor_color = 0x00AAAAAA;
+    // game->map_info->ceiling_color = 0x00BBDDFF;
 }
+void	parse_color(char *line, int *color)
+{
+	char	**colors;
+	int		r;
+	int		g;
+	int		b;
+	int		i;
 
+	colors = ft_split(line, ',');
+	i = 0;
+	while (colors[i])
+		i++;
+	if (i != 3)
+	{
+		free_split(colors);
+		show_error("Error: 색상 형식이 잘못되었습니다 (RGB 3개 필요)\n");
+	}
+	r = ft_atoi(colors[0]);
+	g = ft_atoi(colors[1]);
+	b = ft_atoi(colors[2]);
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		free_split(colors);
+		show_error("Error: RGB 값은 0-255 사이여야 합니다\n");
+	}
+	*color = (r << 16) | (g << 8) | b;
+	free_split(colors);
+}
+void	set_floor_ceiling(t_game *game, char *file_name)
+{
+	int		fd;
+	char	*line;
+	char	*color_str;
+
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		show_error("Error: 파일 열기 실패\n");
+	
+	while ((line = get_next_line(fd)))
+	{
+		if (ft_strncmp(line, "F ", 2) == 0)
+		{
+			color_str = line + 2;
+			while (*color_str == ' ')
+				color_str++;
+			parse_color(color_str, &game->map_info->floor_color);
+		}
+		else if (ft_strncmp(line, "C ", 2) == 0)
+		{
+			color_str = line + 2;
+			while (*color_str == ' ')
+				color_str++;
+			parse_color(color_str, &game->map_info->ceiling_color);
+		}
+		free(line);
+	}
+	close(fd);
+}
 void	parse_and_validate_map(t_game *game, char **argv)
 {
 	int	i;
@@ -239,6 +308,9 @@ void	parse_and_validate_map(t_game *game, char **argv)
 	}
 	// 텍스처 경로와 색상 설정
 	set_texture_paths(game, argv[1]);
+	set_floor_ceiling(game, argv[1]);
+	printf("바닥 색상: 0x%08X\n", game->map_info->floor_color);
+	printf("천장 색상: 0x%08X\n", game->map_info->ceiling_color);
 	is_it_correct_map(game->map_info, argv[1]);
 	
 	i = 0;
