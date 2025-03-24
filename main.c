@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/14 12:58:26 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:48:12 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,35 +107,120 @@ void	init_map(t_game *game, char *argv)
 			show_error("Memory allocation failed for map_info\n");
 		memset(game->map_info, 0, sizeof(t_map_info));
 	}
-	
 	game->map_info->height = find_height(game->map_info, argv);
 	printf("Map height: %d\n", game->map_info->height);
-	
 	game->map_info->map = (char **)malloc(sizeof(char *) * (game->map_info->height + 1));
 	if (!game->map_info->map)
 		show_error("Memory allocation failed for map\n");
-	
 	making_map(game->map_info, argv);
 	game->map_info->width = max_width(game->map_info);
 	printf("Map width: %d\n", game->map_info->width);
-	
 	finding_xy(game->map_info);
 	
 	printf("Player position: x=%f, y=%f, dir=%c\n", 
 		game->map_info->player_x, game->map_info->player_y, game->map_info->player_dir);
 }
-
-void	set_texture_paths(t_game *game)
+int	check_its_nswe(char *str)
 {
-	// 텍스처 경로 설정
-	game->map_info->north_texture = "textures/north.xpm";
-	game->map_info->south_texture = "textures/south.xpm";
-	game->map_info->west_texture = "textures/west.xpm";
-	game->map_info->east_texture = "textures/east.xpm";
-	
-	// 바닥과 천장 색상 설정
-	game->map_info->floor_color = 0x00AAAAAA;
-	game->map_info->ceiling_color = 0x00BBDDFF;
+	if(ft_strncmp(str, "NO ", 3) == 0)
+		return 1;
+	else if(ft_strncmp(str, "SO ", 3) == 0)
+		return 1;
+	else if(ft_strncmp(str, "WE ", 3) == 0)
+		return 1;
+	else if(ft_strncmp(str, "EA ", 3) == 0)
+		return 1;
+	else
+		return 0;
+}
+
+int find_dir(char *temp)
+{
+    int i = 0;
+    
+    // 공백 건너뛰기
+    while (temp[i] && temp[i] == ' ')
+        i++;
+    
+    // 식별자 건너뛰기 (NO, SO, WE, EA)
+    while (temp[i] && temp[i] != ' ')
+        i++;
+    
+    // 다시 공백 건너뛰기
+    while (temp[i] && temp[i] == ' ')
+        i++;
+    
+    return (i);
+}
+
+void init_map_nswe(t_game *game, char *line)
+{
+    char *path;
+    int i;
+    
+    if (!line)
+        return;
+    
+    // 메모리 할당
+    path = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
+    if (!path)
+        show_error("Memory allocation failed for texture path\n");
+    
+    i = find_dir(line);
+    
+    if (ft_strncmp(line, "NO ", 3) == 0)
+    {
+        ft_strlcpy(path, line + i, ft_strlen(line + i) + 1);
+        game->map_info->north_texture = path;
+    }
+    else if (ft_strncmp(line, "SO ", 3) == 0)
+    {
+        ft_strlcpy(path, line + i, ft_strlen(line + i) + 1);
+        game->map_info->south_texture = path;
+    }
+    else if (ft_strncmp(line, "WE ", 3) == 0)
+    {
+        ft_strlcpy(path, line + i, ft_strlen(line + i) + 1);
+        game->map_info->west_texture = path;
+    }
+    else if (ft_strncmp(line, "EA ", 3) == 0)
+    {
+        ft_strlcpy(path, line + i, ft_strlen(line + i) + 1);
+        game->map_info->east_texture = path;
+    }
+    else
+    {
+        free(path); // 해당하는 텍스처가 없으면 메모리 해제
+    }
+}
+
+void set_texture_paths(t_game *game, char *file_name)
+{
+    int fd;
+    char *line;
+    
+    fd = open(file_name, O_RDONLY);
+    if (fd < 0)
+        show_error("Error opening file in set_texture_paths\n");
+    
+    while ((line = get_next_line(fd)))
+    {
+        if (check_its_nswe(line) == 1)
+            init_map_nswe(game, line);
+        free(line);
+    }
+    
+    close(fd);
+    
+    // 텍스처 경로가 제대로 설정되었는지 확인
+    printf("North texture: %s\n", game->map_info->north_texture);
+    printf("South texture: %s\n", game->map_info->south_texture);
+    printf("West texture: %s\n", game->map_info->west_texture);
+    printf("East texture: %s\n", game->map_info->east_texture);
+
+    // 바닥과 천장 색상 설정 (기존과 동일)
+    game->map_info->floor_color = 0x00AAAAAA;
+    game->map_info->ceiling_color = 0x00BBDDFF;
 }
 
 void	parse_and_validate_map(t_game *game, char **argv)
@@ -152,7 +237,8 @@ void	parse_and_validate_map(t_game *game, char **argv)
 		printf("%s", game->map_info->map[i]);
 		i++;
 	}
-	
+	// 텍스처 경로와 색상 설정
+	set_texture_paths(game, argv[1]);
 	is_it_correct_map(game->map_info, argv[1]);
 	
 	i = 0;
@@ -162,9 +248,7 @@ void	parse_and_validate_map(t_game *game, char **argv)
 		printf("%s", game->map_info->map[i]);
 		i++;
 	}
-	
-	// 텍스처 경로와 색상 설정
-	set_texture_paths(game);
+
 }
 
 /* ------------------- 메인 함수 ------------------- */

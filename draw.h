@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 15:30:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/21 20:11:05 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/24 14:41:08 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ typedef struct s_map_info
 	int		ceiling_color;
 	int		*row_lengths;
 	int		player_cnt;//플레이어갯수(파싱)
-	// char	*NO;
-	// char	*SO;
-	// char	*WE;
-	// char	*EA;
 	// char	*F;
 	// char	*C;
 
@@ -152,5 +148,7 @@ void    double_free(char **map);
 void    map_parsing(t_map_info *map, int x, int y);
 void	is_it_correct_map(t_map_info *map, char *file_name);
 void    show_error(char *str);
+void extract_textures(t_game *game, char *file_name);
+void making_map_with_actual_data(t_map_info *map, char *file_name);
 
 #endif
