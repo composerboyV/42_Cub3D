@@ -1,9 +1,10 @@
 # 프로젝트 이름
-NAME		= cub3D
+NAME		= cub3
 
 # 컴파일러 및 플래그
 CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -g -O3
+ CFLAGS		= -Wall -Wextra -Werror -g -fsanitize=address -O3
+#CFLAGS		= -Wall -Wextra -Werror -g
 
 # 라이브러리 디렉토리
 LIBFT_DIR	= Libft

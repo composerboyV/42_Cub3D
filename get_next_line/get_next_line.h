@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 10:06:44 by sooslee           #+#    #+#             */
-/*   Updated: 2025/03/10 14:37:03 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/28 21:08:26 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_next_line(int fd);
 int		where_next_line(char *what_i_read);
 int		find_nextline(char *result);
 // size_t	ft_strlen(const char *str);
-char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin2(char const *s1, char const *s2);
 // char	*ft_strdup(const char *string);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 

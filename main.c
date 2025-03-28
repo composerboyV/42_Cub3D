@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/24 15:17:04 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/28 21:08:26 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ int	find_height(t_map_info *map, char *argv)
 	{
 		map->height++;
 		free(line);
+		line=NULL;
 	}
 	close(fd);
+	free(line);
 	return (map->height);
 }
 
@@ -73,24 +75,31 @@ void	finding_xy(t_map_info *map)
 	}
 }
 
-void	making_map(t_map_info *map, char *file_name)
+void making_map(t_map_info *map, char *file_name)
 {
-	int		i;
-	int		fd;
-	char	*line;
+    int     i;
+    int     fd;
+    char    *line;
 
-	fd = open(file_name, O_RDONLY);
-	if (fd < 0)
-		show_error("Error opening file in making_map\n");
-	i = 0;
-	while ((line = get_next_line(fd)))
-	{
-		map->map[i] = ft_strdup(line);
-		i++;
-		free(line);
-	}
-	map->map[i] = NULL;
-	close(fd);
+    fd = open(file_name, O_RDONLY);
+    if (fd < 0)
+        show_error("파일 열기 오류 (making_map)\n");
+    
+    i = 0;
+    while (1)
+    {
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+        map->map[i] = ft_strdup(line); // 라인 복사 저장
+        free(line); // 원본 라인 해제
+		printf("%s", line);
+        line = NULL;
+        i++;
+    }
+	free(line);  // 원본 라인 해제
+    map->map[i] = NULL; // 맵 끝 표시
+    close(fd);
 }
 
 int	max_width(t_map_info *map)
@@ -173,7 +182,6 @@ void init_map_nswe(t_game *game, char *line)
     
     if (!line)
         return;
-    
     // 메모리 할당
     path = (char *)malloc(sizeof(char) * (ft_strlen(line) + 1));
     if (!path)
@@ -223,6 +231,7 @@ void set_texture_paths(t_game *game, char *file_name)
             init_map_nswe(game, line);
         free(line);
     }
+	free(line);
     close(fd);
     // 텍스처 경로가 제대로 설정되었는지 확인
     printf("North texture: %s\n", game->map_info->north_texture);
@@ -271,7 +280,6 @@ void	set_floor_ceiling(t_game *game, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		show_error("Error: 파일 열기 실패\n");
-	
 	while ((line = get_next_line(fd)))
 	{
 		if (ft_strncmp(line, "F ", 2) == 0)
@@ -290,6 +298,7 @@ void	set_floor_ceiling(t_game *game, char *file_name)
 		}
 		free(line);
 	}
+	free(line);
 	close(fd);
 }
 void	parse_and_validate_map(t_game *game, char **argv)
@@ -322,33 +331,57 @@ void	parse_and_validate_map(t_game *game, char **argv)
 	}
 
 }
+void cleanup_game(t_game *game)
+{
+    int i;
+
+    if (game->map_info)
+    {
+        // 맵 내용물 해제
+        if (game->map_info->map)
+        {
+            i = 0;
+            while (game->map_info->map[i])
+            {
+                free(game->map_info->map[i]);
+                i++;
+            }
+            free(game->map_info->map);
+        }
+		free(game->map_info->north_texture);
+        free(game->map_info->south_texture);
+        free(game->map_info->west_texture);
+        free(game->map_info->east_texture);
+        
+        // 맵 정보 구조체 해제
+        free(game->map_info);
+    }
+    
+    // 여기에 텍스처 등 다른 리소스 해제 코드 추가
+}
 
 /* ------------------- 메인 함수 ------------------- */
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	t_game	game;
+    t_game game;
 
-	if (argc != 2)
-		show_error("Error: Invalid number of arguments\n");
-	
-	// 모든 데이터 초기화
-	memset(&game, 0, sizeof(t_game));
-	
-	// 맵 파싱 및 검증
-	parse_and_validate_map(&game, argv);
-	
-	// 그래픽 시작
-	if (!start_draw(&game))
-	{
-		printf("Error: Failed to initialize drawing engine\n");
-		if (game.map_info && game.map_info->map)
-			double_free(game.map_info->map);
-		if (game.map_info)
-			free(game.map_info);
-		return (1);
-	}
-	if (game.draw.mlx)
-		free(game.draw.mlx);
-	return (0);
+    if (argc != 2)
+        show_error("오류: 인자 개수가 잘못되었습니다\n");
+    
+    memset(&game, 0, sizeof(t_game));
+    
+    // 맵 파싱 및 검증
+    parse_and_validate_map(&game, argv);
+    
+    // 그래픽 시작
+    if (!start_draw(&game))
+    {
+        printf("오류: 그래픽 엔진 초기화 실패\n");
+        cleanup_game(&game); // 실패 시 정리
+        return (1);
+    }
+    
+    cleanup_game(&game); // 프로그램 종료 전 정리
+    return (0);
 }

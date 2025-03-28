@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 22:00:06 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/14 10:54:48 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/03/28 20:30:27 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ int	exit_game(t_game *game)
 {
 	int	i;
 
+	free(game->map_info->north_texture);
+	free(game->map_info->south_texture);
+	free(game->map_info->west_texture);
+	free(game->map_info->east_texture);
 	if (game->draw.img)
 		mlx_destroy_image(game->draw.mlx, game->draw.img);
 	i = -1;
@@ -26,6 +30,11 @@ int	exit_game(t_game *game)
 	}
 	if (game->draw.win)
 		mlx_destroy_window(game->draw.mlx, game->draw.win);
+	if (game->map_info && game->map_info->map)
+		double_free(game->map_info->map);
+	if (game->map_info)
+		free(game->map_info);
+
 	exit(0);
 	return (0);
 }

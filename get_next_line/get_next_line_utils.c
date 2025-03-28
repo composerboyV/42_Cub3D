@@ -6,25 +6,25 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:14:22 by sooslee           #+#    #+#             */
-/*   Updated: 2025/03/10 14:45:58 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/28 20:18:32 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-// size_t	ft_strlen(const char *str)
-// {
-// 	size_t	cnt;
+size_t	ft_strlen(const char *str)
+{
+	size_t	cnt;
 
-// 	cnt = 0;
-// 	while (str[cnt])
-// 	{
-// 		cnt ++;
-// 	}
-// 	return (cnt);
-// }
+	cnt = 0;
+	while (str[cnt])
+	{
+		cnt ++;
+	}
+	return (cnt);
+}
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin2(char const *s1, char const *s2)
 {
 	char	*result;
 	int		total_len;
@@ -52,23 +52,23 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (result);
 }
 
-// char	*ft_strdup(const char *string)
-// {
-// 	char		*beduped;
-// 	size_t		i;
+char	*ft_strdup(const char *string)
+{
+	char		*beduped;
+	size_t		i;
 
-// 	beduped = malloc((ft_strlen(string) + 1) * sizeof(char));
-// 	if (!beduped)
-// 		return (NULL);
-// 	i = 0;
-// 	while (i < ft_strlen(string))
-// 	{
-// 		beduped[i] = string[i];
-// 		i ++;
-// 	}
-// 	beduped[i] = '\0';
-// 	return (beduped);
-// }
+	beduped = malloc((ft_strlen(string) + 1) * sizeof(char));
+	if (!beduped)
+		return (NULL);
+	i = 0;
+	while (i < ft_strlen(string))
+	{
+		beduped[i] = string[i];
+		i ++;
+	}
+	beduped[i] = '\0';
+	return (beduped);
+}
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

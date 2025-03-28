@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sooslee <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/05 11:17:11 by sooslee           #+#    #+#             */
-/*   Updated: 2024/04/15 17:31:16 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/28 20:18:31 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*lets_read(char *what_read, int fd, int *newline)
 			free(buffer);
 			return (NULL);
 		}
-		what_read = ft_strjoin(what_read, buffer);
+		what_read = ft_strjoin2(what_read, buffer);
 		*newline = where_nextline(what_read);
 		if (*newline != -1 || (how_much_read < BUFFER_SIZE))
 		{
