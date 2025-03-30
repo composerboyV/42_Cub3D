@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:57:58 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/24 16:43:22 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/30 20:11:06 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int file_exists(char *filename)
     if (fd < 0)
     {
         //printf("❌ 파일을 열 수 없음: %s (errno: %d)\n", filename, errno);
+        exit(1);
         return (0);
     }
     close(fd);
@@ -115,7 +116,7 @@ int load_textures(t_game *game)
         
         if (!texture_paths[i] || ft_strlen(texture_paths[i]) == 0)
         {
-            printf("⚠️ 텍스처 경로가 비어있습니다. 더미 텍스처 생성 중...\n");
+            show_error(" 텍스처 경로가 비어있습니다.\n");
             create_dummy_texture(game, i, 64, 64);
             continue;
         }
@@ -131,6 +132,7 @@ int load_textures(t_game *game)
             printf("  - XPM 파일 형식이 유효한지 확인하세요\n");
             printf("  - MLX 라이브러리가 이 XPM을 지원하는지 확인하세요\n");
             printf("  - 더미 텍스처 생성 중...\n");
+            show_error("Error\n not image");
             create_dummy_texture(game, i, 64, 64);
             if (!game->draw.textures[i].img)
                 return (0);

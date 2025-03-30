@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 22:00:06 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/28 20:30:27 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:42:03 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	exit_game(t_game *game)
 	free(game->map_info->south_texture);
 	free(game->map_info->west_texture);
 	free(game->map_info->east_texture);
+	free(game->map_info->row_lengths);
 	if (game->draw.img)
 		mlx_destroy_image(game->draw.mlx, game->draw.img);
 	i = -1;

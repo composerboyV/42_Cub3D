@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/28 21:08:26 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/03/29 12:59:52 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,6 @@ void making_map(t_map_info *map, char *file_name)
 			break ;
         map->map[i] = ft_strdup(line); // 라인 복사 저장
         free(line); // 원본 라인 해제
-		printf("%s", line);
         line = NULL;
         i++;
     }
@@ -238,10 +237,6 @@ void set_texture_paths(t_game *game, char *file_name)
     printf("South texture: %s\n", game->map_info->south_texture);
     printf("West texture: %s\n", game->map_info->west_texture);
     printf("East texture: %s\n", game->map_info->east_texture);
-
-    // 바닥과 천장 색상 설정 (기존과 동일)
-    // game->map_info->floor_color = 0x00AAAAAA;
-    // game->map_info->ceiling_color = 0x00BBDDFF;
 }
 void	parse_color(char *line, int *color)
 {
@@ -352,12 +347,8 @@ void cleanup_game(t_game *game)
         free(game->map_info->south_texture);
         free(game->map_info->west_texture);
         free(game->map_info->east_texture);
-        
-        // 맵 정보 구조체 해제
         free(game->map_info);
     }
-    
-    // 여기에 텍스처 등 다른 리소스 해제 코드 추가
 }
 
 /* ------------------- 메인 함수 ------------------- */
