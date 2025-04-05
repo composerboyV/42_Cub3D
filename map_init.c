@@ -45,6 +45,7 @@ void	init_map(t_game *game, char *argv)
 		game->map_info->player_x, game->map_info->player_y,
 		game->map_info->player_dir);
 }
+
 static void	check_rgb_values(int r, int g, int b, char **colors)
 {
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)

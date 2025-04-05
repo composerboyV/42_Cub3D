@@ -41,6 +41,7 @@ int	init_draw(t_game *game)
 			&game->draw.size_line, &game->draw.endian);
 	return (1);
 }
+
 void	init_map_row_lengths(t_game *game)
 {
 	int	y;

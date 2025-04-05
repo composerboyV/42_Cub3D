@@ -74,6 +74,7 @@ int	start_draw(t_game *game)
 	free(game->draw.data);
 	return (1);
 }
+
 void	clean_texture_path(char *path)
 {
 	int	len;

@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:45:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 16:34:44 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 18:26:44 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ static void	set_line_height(t_game *game)
 	ray = &game->draw.ray;
 	win_height = game->draw.win_height;
 	ray->line_height = (int)(win_height / ray->perp_wall_dist);
-	if (ray->line_height > win_height * 2)
-		ray->line_height = win_height * 2;
+	if (ray->line_height > win_height * 10)
+		ray->line_height = win_height * 10;
 }
 
 static void	set_draw_start(t_game *game)

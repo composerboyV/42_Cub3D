@@ -61,6 +61,7 @@ int	key_release(int key, t_game *game)
 		game->keys[5] = 0;
 	return (0);
 }
+
 void	double_free(char **map)
 {
 	int	i;

@@ -1,9 +1,9 @@
 F 220,100,0
 
-NO ./test/images/NO.xpm
+NO ./test/images/EA.xpm
 SO ./test/images/SO.xpm
-WE ./test/images/WE.xpm
-EA ./test/images/EA.xpm
+WE ./test/images/redbrick.xpm
+EA ./test/images/wood.xpm
 
 
 C 225,30,0

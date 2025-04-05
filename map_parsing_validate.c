@@ -57,6 +57,7 @@ int	has_wall_in_line(char *line)
 	}
 	return (0);
 }
+
 void	is_it_correct_map(t_map_info *map, char *file_name)
 {
 	check_file_name(file_name);

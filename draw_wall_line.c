@@ -70,6 +70,7 @@ void	draw_wall_line(t_game *game, int x)
 	draw_ceiling(game, x);
 	draw_floor(game, x);
 }
+
 void	show_error(char *str)
 {
 	ssize_t	result;

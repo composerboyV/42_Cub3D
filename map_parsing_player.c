@@ -54,6 +54,7 @@ void	are_you_alone(t_map_info *map)
 		show_error("Count of player is wrong\n");
 	}
 }
+
 void	move_player(t_game *game)
 {
 	move_forward(game);

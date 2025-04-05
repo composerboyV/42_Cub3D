@@ -275,5 +275,6 @@ int		check_its_nswe(char *str);
 int		find_dir(char *temp);
 int		file_exists(char *filename);
 int		is_player_or_zero(char ch);
+int		can_move_to(t_game *game, double new_x, double new_y);
 
 #endif

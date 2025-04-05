@@ -64,6 +64,7 @@ void	check_for_non_map_content(t_map_info *map)
 		y++;
 	}
 }
+
 int	is_map_identifier(char *line)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0 || \

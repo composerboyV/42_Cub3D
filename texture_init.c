@@ -53,6 +53,7 @@ void	init_map_nswe(t_game *game, char *line)
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		set_texture_path(line, i, &game->map_info->east_texture);
 }
+
 static void	print_texture_paths(t_game *game)
 {
 	printf("North texture: %s\n", game->map_info->north_texture);

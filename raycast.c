@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast   3.c                                      :+:      :+:    :+:   */
+/*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:58:42 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:36:33 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 18:45:03 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,37 @@ void	cast_rays(t_game *game)
 		perform_dda(game);
 		calculate_wall_distance(game);
 		draw_wall_line(game, x);
+	}
+}
+
+void	move_forward(t_game *game)
+{
+	double	new_x;
+	double	new_y;
+
+	if (!game->keys[0])
+		return ;
+	new_x = game->player.x + game->player.dir_x * game->player.move_speed;
+	new_y = game->player.y + game->player.dir_y * game->player.move_speed;
+	if (can_move_to(game, new_x, new_y))
+	{
+		game->player.x = new_x;
+		game->player.y = new_y;
+	}
+}
+
+void	move_backward(t_game *game)
+{
+	double	new_x;
+	double	new_y;
+
+	if (!game->keys[2])
+		return ;
+	new_x = game->player.x - game->player.dir_x * game->player.move_speed;
+	new_y = game->player.y - game->player.dir_y * game->player.move_speed;
+	if (can_move_to(game, new_x, new_y))
+	{
+		game->player.x = new_x;
+		game->player.y = new_y;
 	}
 }
