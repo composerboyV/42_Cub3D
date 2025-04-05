@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_validate.c                             :+:      :+:    :+:   */
+/*   map_parsing_validate   4.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:13:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:05:45 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:29:32 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,14 @@ int	has_wall_in_line(char *line)
 		i++;
 	}
 	return (0);
+}
+void	is_it_correct_map(t_map_info *map, char *file_name)
+{
+	check_file_name(file_name);
+	check_map_characters(map);
+	check_for_non_map_content(map);
+	check_map_boundaries(map);
+	are_you_alone(map);
+	check_flood_fill_map(map);
+	map_parsing(map, map->player_x, map->player_y);
 }

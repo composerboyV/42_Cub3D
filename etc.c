@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:59:33 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/11 22:09:03 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:41:52 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,16 @@ int	key_release(int key, t_game *game)
 	else if (key == KEY_RIGHT)
 		game->keys[5] = 0;
 	return (0);
+}
+void	double_free(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }

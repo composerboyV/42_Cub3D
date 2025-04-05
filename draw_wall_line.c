@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:59:20 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/13 21:17:56 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:50:37 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static void	draw_walls(t_game *game, int x, double step, double tex_pos)
 	y = game->draw.ray.draw_start - 1;
 	while (++y < game->draw.ray.draw_end)
 	{
-		tex_y = (int)tex_pos & (game->draw.textures[game->draw.ray.tex_num].height - 1);
+		tex_y = (int)tex_pos & (game->draw.textures[game->draw. \
+			ray.tex_num].height - 1);
 		tex_pos += step;
 		color = game->draw.textures[game->draw.ray.tex_num].data[
 			game->draw.textures[game->draw.ray.tex_num].height
@@ -52,7 +53,8 @@ static void	draw_floor(t_game *game, int x)
 
 	y = game->draw.ray.draw_end - 1;
 	while (++y < game->draw.win_height)
-		game->draw.data[y * game->draw.win_width + x] = game->map_info->floor_color;
+		game->draw.data[y * game->draw.win_width + x] \
+			= game->map_info->floor_color;
 }
 
 void	draw_wall_line(t_game *game, int x)
@@ -67,4 +69,12 @@ void	draw_wall_line(t_game *game, int x)
 	draw_walls(game, x, step, tex_pos);
 	draw_ceiling(game, x);
 	draw_floor(game, x);
+}
+void	show_error(char *str)
+{
+	ssize_t	result;
+
+	result = write (1, str, ft_strlen(str));
+	(void)result;
+	exit(1);
 }

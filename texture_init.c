@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/04 15:00:35 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:51:38 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,31 @@ void	init_map_nswe(t_game *game, char *line)
 		set_texture_path(line, i, &game->map_info->west_texture);
 	else if (ft_strncmp(line, "EA ", 3) == 0)
 		set_texture_path(line, i, &game->map_info->east_texture);
+}
+static void	print_texture_paths(t_game *game)
+{
+	printf("North texture: %s\n", game->map_info->north_texture);
+	printf("South texture: %s\n", game->map_info->south_texture);
+	printf("West texture: %s\n", game->map_info->west_texture);
+	printf("East texture: %s\n", game->map_info->east_texture);
+}
+
+void	set_texture_paths(t_game *game, char *file_name)
+{
+	int		fd;
+	char	*line;
+
+	fd = open(file_name, O_RDONLY);
+	if (fd < 0)
+		show_error("Error opening file in set_texture_paths\n");
+	line = get_next_line(fd);
+	while (line)
+	{
+		if (check_its_nswe(line) == 1)
+			init_map_nswe(game, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	print_texture_paths(game);
 }

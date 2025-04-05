@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init.c                                         :+:      :+:    :+:   */
+/*   map_init3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:00:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/04 10:00:35 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:45:25 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	alloc_map_info(t_game *game)
 
 static void	alloc_map(t_game *game)
 {
-	game->map_info->map = (char **)malloc(sizeof(char *)
+	game->map_info->map = (char **)malloc(sizeof(char *) \
 		* (game->map_info->height + 1));
 	if (!game->map_info->map)
 		show_error("Memory allocation failed for map\n");
@@ -44,4 +44,37 @@ void	init_map(t_game *game, char *argv)
 	printf("Player position: x=%f, y=%f, dir=%c\n",
 		game->map_info->player_x, game->map_info->player_y,
 		game->map_info->player_dir);
+}
+static void	check_rgb_values(int r, int g, int b, char **colors)
+{
+	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+	{
+		free_split(colors);
+		show_error("Error: RGB 값은 0-255 사이여야 합니다\n");
+	}
+}
+
+void	parse_color(char *line, int *color)
+{
+	char	**colors;
+	int		r;
+	int		g;
+	int		b;
+	int		i;
+
+	colors = ft_split(line, ',');
+	i = 0;
+	while (colors[i])
+		i++;
+	if (i != 3)
+	{
+		free_split(colors);
+		show_error("Error: 색상 형식이 잘못되었습니다 (RGB 3개 필요)\n");
+	}
+	r = ft_atoi(colors[0]);
+	g = ft_atoi(colors[1]);
+	b = ft_atoi(colors[2]);
+	check_rgb_values(r, g, b, colors);
+	*color = (r << 16) | (g << 8) | b;
+	free_split(colors);
 }

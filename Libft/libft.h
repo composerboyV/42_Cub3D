@@ -6,7 +6,7 @@
 /*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 15:55:27 by sooslee           #+#    #+#             */
-/*   Updated: 2025/03/10 14:47:49 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/04/05 14:37:12 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include<unistd.h>
 # include<stdlib.h>
 # include<stddef.h>
-
 
 typedef struct s_list
 {

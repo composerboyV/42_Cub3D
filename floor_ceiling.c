@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:10:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:40:49 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 15:26:31 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ void	set_floor_ceiling(t_game *game, char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 		show_error("Error: 파일 열기 실패\n");
-	while ((line = get_next_line(fd)))
+	line = NULL;
+	while (1)
 	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
 		process_floor_color(game, line);
 		process_ceiling_color(game, line);
 		free(line);
 	}
-	free(line);
 	close(fd);
 }

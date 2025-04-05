@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "libft.h": "c",
-        "draw.h": "c"
+        "draw.h": "c",
+        "get_next_line.h": "c"
     }
 }

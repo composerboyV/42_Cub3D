@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 22:00:06 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/29 12:42:03 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:41:53 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ int	exit_game(t_game *game)
 		double_free(game->map_info->map);
 	if (game->map_info)
 		free(game->map_info);
-
 	exit(0);
 	return (0);
 }
@@ -62,9 +61,7 @@ int	start_draw(t_game *game)
 		printf("Failed to load textures\n");
 		return (0);
 	}
-	printf("Initializing player...\n");
 	init_player(game);
-	printf("Setting up event hooks...\n");
 	mlx_hook(game->draw.win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->draw.win, 3, 1L << 1, key_release, game);
 	mlx_hook(game->draw.win, 17, 0, exit_game, game);
@@ -75,5 +72,35 @@ int	start_draw(t_game *game)
 	free(game->draw.win);
 	free(game->draw.img);
 	free(game->draw.data);
+	return (1);
+}
+void	clean_texture_path(char *path)
+{
+	int	len;
+
+	if (!path)
+		return ;
+	len = ft_strlen(path);
+	while (len > 0 && (path[len - 1] == '\n' || path[len - 1] == '\r' || \
+				path[len - 1] == ' ' || path[len - 1] == '\t'))
+	{
+		path[len - 1] = '\0';
+		len--;
+	}
+}
+
+int	file_exists(char *filename)
+{
+	int	fd;
+
+	if (!filename)
+		return (0);
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+	{
+		exit(1);
+		return (0);
+	}
+	close(fd);
 	return (1);
 }

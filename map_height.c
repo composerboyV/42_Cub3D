@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:00:10 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:24:34 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:00:34 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,20 @@ int	find_height(t_map_info *map, char *argv)
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 		show_error("Error opening file in find_height\n");
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		map->height++;
 		free(line);
-		line = NULL;
+		line = get_next_line(fd);
 	}
 	close(fd);
-	free(line);
 	return (map->height);
+}
+
+static int	is_player_char(char c)
+{
+	return (c == 'N' || c == 'S' || c == 'W' || c == 'E');
 }
 
 void	finding_xy(t_map_info *map)
@@ -43,8 +48,7 @@ void	finding_xy(t_map_info *map)
 		x = 0;
 		while (map->map[y][x])
 		{
-			if (map->map[y][x] == 'N' || map->map[y][x] == 'S'
-				|| map->map[y][x] == 'W' || map->map[y][x] == 'E')
+			if (is_player_char(map->map[y][x]))
 			{
 				map->player_x = x;
 				map->player_y = y;
@@ -67,17 +71,14 @@ void	making_map(t_map_info *map, char *file_name)
 	if (fd < 0)
 		show_error("파일 열기 오류 (making_map)\n");
 	i = 0;
-	while (1)
+	line = get_next_line(fd);
+	while (line)
 	{
-		line = get_next_line(fd);
-		if (!line)
-			break ;
 		map->map[i] = ft_strdup(line);
 		free(line);
-		line = NULL;
+		line = get_next_line(fd);
 		i++;
 	}
-	free(line);
 	map->map[i] = NULL;
 	close(fd);
 }

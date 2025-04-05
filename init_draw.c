@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_draw.c                                        :+:      :+:    :+:   */
+/*   init_draw2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:57:27 by junkwak           #+#    #+#             */
-/*   Updated: 2025/03/14 09:31:39 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:44:13 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,44 @@ int	init_draw(t_game *game)
 	game->draw.data = (int *)mlx_get_data_addr(game->draw.img, &game->draw.bpp,
 			&game->draw.size_line, &game->draw.endian);
 	return (1);
+}
+void	init_map_row_lengths(t_game *game)
+{
+	int	y;
+
+	if (!game->map_info->row_lengths)
+	{
+		game->map_info->row_lengths = (int *)malloc(sizeof(int)
+				* game->map_info->height);
+		if (!game->map_info->row_lengths)
+		{
+			printf("Failed to allocate memory for row_lengths\n");
+			exit_game(game);
+		}
+	}
+	y = -1;
+	while (++y < game->map_info->height)
+	{
+		game->map_info->row_lengths[y] = strlen(game->map_info->map[y]);
+		printf("Row %d length: %d\n", y, game->map_info->row_lengths[y]);
+	}
+}
+
+void	process_map_spaces(t_game *game)
+{
+	int	y;
+	int	x;
+	int	row_len;
+
+	y = -1;
+	while (++y < game->map_info->height)
+	{
+		row_len = game->map_info->row_lengths[y];
+		x = -1;
+		while (++x < row_len)
+		{
+			if (game->map_info->map[y][x] == ' ')
+				game->map_info->map[y][x] = '1';
+		}
+	}
 }

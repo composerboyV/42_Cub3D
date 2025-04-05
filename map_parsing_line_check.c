@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:13:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:08:36 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:48:10 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,15 @@ void	check_invalid_char_in_line(t_map_info *map, int y)
 		}
 		x++;
 	}
+}
+
+int	all_identifiers_found(t_map_flags flags)
+{
+	return (flags.no_found && flags.so_found && flags.we_found && \
+		flags.ea_found && flags.f_found && flags.c_found);
+}
+
+int	is_map_start_char(char c)
+{
+	return (c == ' ' || c == '1' || c == '0');
 }

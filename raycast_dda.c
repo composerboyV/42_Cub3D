@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycast_dda.c                                      :+:      :+:    :+:   */
+/*   raycast_dda   4.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 18:40:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:00:39 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:34:57 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,30 @@ void	setup_dda(t_game *game)
 {
 	setup_dda_x(game);
 	setup_dda_y(game);
+}
+
+void	perform_dda(t_game *game)
+{
+	game->draw.ray.hit = 0;
+	while (game->draw.ray.hit == 0)
+	{
+		if (game->draw.ray.side_dist_x < game->draw.ray.side_dist_y)
+		{
+			game->draw.ray.side_dist_x += game->draw.ray.delta_dist_x;
+			game->draw.ray.map_x += game->draw.ray.step_x;
+			game->draw.ray.side = 0;
+		}
+		else
+		{
+			game->draw.ray.side_dist_y += game->draw.ray.delta_dist_y;
+			game->draw.ray.map_y += game->draw.ray.step_y;
+			game->draw.ray.side = 1;
+		}
+		if (!is_valid_map_index(game, game->draw.ray.map_x, \
+					game->draw.ray.map_y))
+			game->draw.ray.hit = 1;
+		else if (game->map_info->map[game->draw.ray.map_y] \
+				[game->draw.ray.map_x] == '1')
+			game->draw.ray.hit = 1;
+	}
 }

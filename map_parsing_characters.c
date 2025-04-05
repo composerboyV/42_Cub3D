@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:14:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 16:47:48 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/05 16:28:37 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,15 @@ void	check_for_non_map_content(t_map_info *map)
 		check_map_line(map, y, &in_map, &map_end);
 		y++;
 	}
+}
+int	is_map_identifier(char *line)
+{
+	if (ft_strncmp(line, "NO ", 3) == 0 || \
+		ft_strncmp(line, "SO ", 3) == 0 || \
+		ft_strncmp(line, "WE ", 3) == 0 || \
+		ft_strncmp(line, "EA ", 3) == 0 || \
+		ft_strncmp(line, "F ", 2) == 0 || \
+		ft_strncmp(line, "C ", 2) == 0)
+		return (1);
+	return (0);
 }

@@ -1,18 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_player.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: junkwak <marvin@42.fr>                     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/03 16:45:52 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:07:50 by junkwak          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
 /*   map_parsing_player.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
@@ -65,4 +53,13 @@ void	are_you_alone(t_map_info *map)
 		printf("player_count : %d\n", map->player_cnt);
 		show_error("Count of player is wrong\n");
 	}
+}
+void	move_player(t_game *game)
+{
+	move_forward(game);
+	move_backward(game);
+	move_left(game);
+	move_right(game);
+	rotate_left(game);
+	rotate_right(game);
 }

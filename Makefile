@@ -16,19 +16,14 @@ SRCS		= main.c \
 		      map_height.c \
      			map_init.c \
       		map_validate.c \
-      		texture_init.c \
 			floor_ceiling.c \
-			cub3d_utils.c \
-			error.c \
-			draw_wall_line.c \
 			dummy_texture.c \
 			  etc.c \
 			  etc2.c \
+			  texture_init.c \
 			  init_draw.c \
-			  init_map.c \
+			  draw_wall_line.c \
 			  init_player.c \
-			  move_player.c \
-			  perfom_dda.c \
 			  raycast.c \
 			  wall_dis.c \
 			  rotate_right.c \
@@ -41,16 +36,12 @@ SRCS		= main.c \
 			  map_parsing_edges.c \
 			  map_parsing_width.c \
 			  map_parsing_boundaries.c \
-			  map_parsing_identifiers.c \
 			  map_parsing_start.c \
 			  map_parsing_validate.c \
 			  map_parsing_line_check.c \
 			  map_parsing_identi_count.c \
 			  map_parsing_characters.c \
-			  map_parsing_main.c \
-			  raycast_dda.c \
-			  texture_path.c \
-			  color_parse.c
+			  raycast_dda.c
 
 # 오브젝트 파일
 OBJS		= $(SRCS:.c=.o)
