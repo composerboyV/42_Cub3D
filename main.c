@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:19:54 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/07 19:03:39 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		show_error("오류: 인자 개수가 잘못되었습니다\n");
-	memset(&game, 0, sizeof(t_game));
+	ft_memset(&game, 0, sizeof(t_game));
 	parse_and_validate_map(&game, argv);
 	if (!start_draw(&game))
 	{
