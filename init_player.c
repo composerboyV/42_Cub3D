@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:58:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:45:38 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/11 12:56:53 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	set_direction_ns(t_game *game, char dir)
 		game->player.dir_x = 0;
 		game->player.dir_y = -1;
 		game->player.plane_x = 0.66;
-		game->player.plane_y = 0;
+		game->player.plane_y = 1;
 	}
 	else if (dir == 'S')
 	{

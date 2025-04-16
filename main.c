@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/07 19:03:39 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:57:14 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int	main(int argc, char **argv)
 	parse_and_validate_map(&game, argv);
 	if (!start_draw(&game))
 	{
-		printf("오류: 그래픽 엔진 초기화 실패\n");
+		show_error("오류: 그래픽 엔진 초기화 실패\n");
 		cleanup_game(&game);
 		return (1);
 	}

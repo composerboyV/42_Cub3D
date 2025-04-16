@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   etc2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 22:00:06 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:41:53 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:04:32 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,21 @@ int	game_loop(t_game *game)
 
 int	start_draw(t_game *game)
 {
-	printf("Initializing draw engine...\n");
 	init_map_row_lengths(game);
 	if (!init_draw(game))
 	{
-		printf("Failed to initialize MLX\n");
+		show_error("Failed to initialize MLX\n");
 		return (0);
 	}
-	printf("Loading textures...\n");
 	if (!load_textures(game))
 	{
-		printf("Failed to load textures\n");
+		show_error("Failed to load textures\n");
 		return (0);
 	}
 	init_player(game);
 	mlx_hook(game->draw.win, 2, 1L << 0, key_press, game);
 	mlx_hook(game->draw.win, 3, 1L << 1, key_release, game);
 	mlx_hook(game->draw.win, 17, 0, exit_game, game);
-	printf("Starting game loop...\n");
 	mlx_loop_hook(game->draw.mlx, game_loop, game);
 	mlx_loop(game->draw.mlx);
 	free(game->draw.mlx);
@@ -93,7 +90,11 @@ void	clean_texture_path(char *path)
 int	file_exists(char *filename)
 {
 	int	fd;
+	int	len;
 
+	len = ft_strlen(filename);
+	if (len < 4 || ft_strncmp(filename + len - 4, ".xpm", 4) != 0)
+		showerror("Error: Texture file must have .xpm extension\n");
 	if (!filename)
 		return (0);
 	fd = open(filename, O_RDONLY);

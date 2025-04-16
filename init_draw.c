@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_draw2.c                                       :+:      :+:    :+:   */
+/*   init_draw.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:57:27 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:44:13 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:57:08 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	init_map_row_lengths(t_game *game)
 				* game->map_info->height);
 		if (!game->map_info->row_lengths)
 		{
-			printf("Failed to allocate memory for row_lengths\n");
+			show_error("Failed to allocate memory for row_lengths\n");
 			exit_game(game);
 		}
 	}
@@ -60,7 +60,6 @@ void	init_map_row_lengths(t_game *game)
 	while (++y < game->map_info->height)
 	{
 		game->map_info->row_lengths[y] = strlen(game->map_info->map[y]);
-		printf("Row %d length: %d\n", y, game->map_info->row_lengths[y]);
 	}
 }
 

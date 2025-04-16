@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:59:20 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:50:37 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 16:25:22 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	draw_walls(t_game *game, int x, double step, double tex_pos)
 		color = game->draw.textures[game->draw.ray.tex_num].data[
 			game->draw.textures[game->draw.ray.tex_num].height
 			* tex_y + game->draw.ray.tex_x];
-		if (game->draw.ray.side == 1)
-			color = (color >> 1) & 8355711;
 		game->draw.data[y * game->draw.win_width + x] = color;
 	}
 }
@@ -75,7 +73,7 @@ void	show_error(char *str)
 {
 	ssize_t	result;
 
-	result = write (1, str, ft_strlen(str));
+	result = write (2, str, ft_strlen(str));
 	(void)result;
 	exit(1);
 }

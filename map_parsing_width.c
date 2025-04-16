@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_width    3.c                           :+:      :+:    :+:   */
+/*   map_parsing_width.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:11:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:39:02 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:45:48 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	check_line_ending(t_map_info *map, int y)
 	x = find_last_non_space(map->map[y]);
 	if (x >= 0 && map->map[y][x] != '1' && map->map[y][x] != ' ')
 	{
-		printf("Map error: Line %d is not properly closed\n", y);
 		show_error("MAP ERROR: Map must be closed by walls!\n");
 	}
 }

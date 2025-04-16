@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:10:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 18:43:39 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:58:13 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	check_cell(t_map_info *map, int i, int j)
 	if (is_player_or_zero(map->map[i][j]) && \
 		(is_at_edge(map, i, j) || is_near_space_or_out_of_bounds(map, i, j)))
 	{
-		printf("Map error: Space/zero at (%d, %d)\n", j, i);
 		show_error("MAP ERROR: Map must be closed by walls!\n");
 	}
 }

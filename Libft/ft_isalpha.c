@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sooslee <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 14:35:07 by sooslee           #+#    #+#             */
-/*   Updated: 2024/03/04 21:59:44 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/04/16 14:00:42 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 int	ft_isalpha(int c)
@@ -21,6 +22,6 @@ int	main()
 	char	c;
 	c = 'a';
 
-	printf("ft_isalpha is sucess : %d \n", ft_isalpha(c));
+	("ft_isalpha is sucess : %d \n", ft_isalpha(c));
 	return 0;
 }*/

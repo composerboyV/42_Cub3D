@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dummy_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
+/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:18:19 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:41:15 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 20:02:38 by sooslee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,14 @@ int	load_textures(t_game *game)
 
 	clean_all_texture_paths(game->map_info);
 	texture_paths = prepare_texture_paths(game);
-	i = 0;
-	while (i < 4)
-		file_exists(texture_paths[i++]);
+	i = -1;
+	while (++i < 4)
+	{
+		if (!file_exists(texture_paths[i]))
+		{
+			show_error("Error: Texture file  not found or invalid\n");
+		}
+	}
 	i = -1;
 	while (++i < 4)
 	{

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parsing_identi_count 4.c                       :+:      :+:    :+:   */
+/*   map_parsing_identi_count.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:14:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:26:39 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:47:56 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	check_invalid_content(t_map_info *map)
 	{
 		if (!is_valid_line_before_map(map->map[i]))
 		{
-			printf("Invalid line before map: '%s'\n", map->map[i]);
 			show_error("MAP ERROR: Invalid content before map!\n");
 		}
 		i++;

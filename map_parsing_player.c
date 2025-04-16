@@ -50,7 +50,6 @@ void	are_you_alone(t_map_info *map)
 	}
 	if (map->player_cnt != 1)
 	{
-		printf("player_count : %d\n", map->player_cnt);
 		show_error("Count of player is wrong\n");
 	}
 }

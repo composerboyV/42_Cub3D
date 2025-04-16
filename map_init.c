@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_init3.c                                        :+:      :+:    :+:   */
+/*   map_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:00:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:45:25 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:57:17 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	alloc_map_info(t_game *game)
 		game->map_info = (t_map_info *)malloc(sizeof(t_map_info));
 		if (!game->map_info)
 			show_error("Memory allocation failed for map_info\n");
-		memset(game->map_info, 0, sizeof(t_map_info));
+		ft_memset(game->map_info, 0, sizeof(t_map_info));
 	}
 }
 

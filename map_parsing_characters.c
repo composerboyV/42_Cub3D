@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:14:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 16:28:37 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:48:18 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	check_map_line(t_map_info *map, int y, int *in_map, int *map_end)
 	check_map_line_status(map, y, in_map, map_end);
 	if (*map_end && !only_spaces)
 	{
-		printf("Invalid content after map ended at line %d\n", y);
 		show_error("MAP ERROR: Content found after map ended!\n");
 	}
 }

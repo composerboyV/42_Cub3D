@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 17:55:17 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/16 13:58:47 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,6 @@ void	print_map_content(t_game *game)
 
 	i = 0;
 	printf("Map content:\n");
-	while (game->map_info->map[i])
-	{
-		printf("%s", game->map_info->map[i]);
-		i++;
-	}
-}
-
-void	print_validated_map(t_game *game)
-{
-	int	i;
-
-	i = 0;
-	printf("\nValidated map:\n");
 	while (game->map_info->map[i])
 	{
 		printf("%s", game->map_info->map[i]);
@@ -62,5 +49,4 @@ void	parse_and_validate_map(t_game *game, char **argv)
 	printf("바닥 색상: 0x%08X\n", game->map_info->floor_color);
 	printf("천장 색상: 0x%08X\n", game->map_info->ceiling_color);
 	is_it_correct_map(game->map_info, argv[1]);
-	print_validated_map(game);
 }
