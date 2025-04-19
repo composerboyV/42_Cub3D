@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 21:50:45 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/16 13:57:14 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:14:16 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	free_map_array(t_map_info *map_info)
 
 static void	free_textures(t_map_info *map_info)
 {
+	printf("11");
 	free(map_info->north_texture);
 	free(map_info->south_texture);
 	free(map_info->west_texture);
@@ -79,3 +80,13 @@ int	main(int argc, char **argv)
 	cleanup_game(&game);
 	return (0);
 }
+//이거 추가함
+void free_null(void **ptr)
+{
+	if (*ptr != NULL || ptr != NULL)
+	{
+		free(*ptr);
+	}
+	*ptr = NULL;
+}
+

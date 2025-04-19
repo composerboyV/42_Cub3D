@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/28 16:14:22 by sooslee           #+#    #+#             */
-/*   Updated: 2025/03/28 20:18:32 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:04:06 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ size_t	ft_strlen(const char *str)
 	size_t	cnt;
 
 	cnt = 0;
+	if (str == NULL)
+		return (cnt);
 	while (str[cnt])
 	{
 		cnt ++;

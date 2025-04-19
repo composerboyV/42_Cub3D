@@ -94,7 +94,7 @@ int	file_exists(char *filename)
 
 	len = ft_strlen(filename);
 	if (len < 4 || ft_strncmp(filename + len - 4, ".xpm", 4) != 0)
-		showerror("Error: Texture file must have .xpm extension\n");
+		show_error("Error: Texture file must have .xpm extension\n");
 	if (!filename)
 		return (0);
 	fd = open(filename, O_RDONLY);
