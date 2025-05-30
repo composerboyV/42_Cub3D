@@ -1,5 +1,5 @@
 # 프로젝트 이름
-NAME		= cub3
+NAME		= cub3D
 
 # 컴파일러 및 플래그
 CC			= cc
@@ -20,6 +20,7 @@ SRCS		= main.c \
 			dummy_texture.c \
 			  etc.c \
 			  etc2.c \
+			  etc3.c \
 			  texture_init.c \
 			  init_draw.c \
 			  draw_wall_line.c \

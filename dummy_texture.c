@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dummy_texture.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sooslee <sooslee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/05 15:18:19 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/16 20:02:38 by sooslee          ###   ########.fr       */
+/*   Updated: 2025/04/19 20:05:57 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	load_textures(t_game *game)
 	{
 		if (!file_exists(texture_paths[i]))
 		{
-			show_error("Error: Texture file  not found or invalid\n");
+			cleanup_and_exit(game, "Error: Texture file not found\n", 1);
 		}
 	}
 	i = -1;

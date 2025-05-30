@@ -6,30 +6,30 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:00:10 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/16 13:56:38 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:49:49 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "draw.h"
 
-int	find_height(t_map_info *map, char *argv)
+int	find_height(t_game *game, char *argv)
 {
 	int		fd;
 	char	*line;
 
-	map->height = 0;
+	game->map_info->height = 0;
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
-		show_error("Error opening file in find_height\n");
+		cleanup_and_exit(game, "Error opening file in find_height\n", 1);
 	line = get_next_line(fd);
 	while (line)
 	{
-		map->height++;
+		game->map_info->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (map->height);
+	return (game->map_info->height);
 }
 
 static int	is_player_char(char c)

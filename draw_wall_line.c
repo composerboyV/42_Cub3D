@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 21:59:20 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/16 16:25:22 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:58:20 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	show_error(char *str)
 {
 	ssize_t	result;
 
-	result = write (2, str, ft_strlen(str));
+	result = write(2, str, ft_strlen(str));
 	(void)result;
 	exit(1);
 }

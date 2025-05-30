@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/04 18:10:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/05 15:26:31 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/19 20:03:42 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	process_floor_color(t_game *game, char *line)
 		color_str = line + 2;
 		while (*color_str == ' ')
 			color_str++;
-		parse_color(color_str, &game->map_info->floor_color);
+		parse_color(game, color_str, &game->map_info->floor_color);
 	}
 }
 
@@ -34,7 +34,7 @@ static void	process_ceiling_color(t_game *game, char *line)
 		color_str = line + 2;
 		while (*color_str == ' ')
 			color_str++;
-		parse_color(color_str, &game->map_info->ceiling_color);
+		parse_color(game, color_str, &game->map_info->ceiling_color);
 	}
 }
 
@@ -45,7 +45,7 @@ void	set_floor_ceiling(t_game *game, char *file_name)
 
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-		show_error("Error: 파일 열기 실패\n");
+		cleanup_and_exit(game, "Error: 파일 열기 실패\n", 1);
 	line = NULL;
 	while (1)
 	{

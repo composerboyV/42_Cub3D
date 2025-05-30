@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 20:01:00 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/16 13:58:47 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:52:58 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,5 @@ void	parse_and_validate_map(t_game *game, char **argv)
 	set_floor_ceiling(game, argv[1]);
 	printf("바닥 색상: 0x%08X\n", game->map_info->floor_color);
 	printf("천장 색상: 0x%08X\n", game->map_info->ceiling_color);
-	is_it_correct_map(game->map_info, argv[1]);
+	is_it_correct_map(game, argv[1]);
 }

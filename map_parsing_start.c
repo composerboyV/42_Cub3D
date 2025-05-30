@@ -6,7 +6,7 @@
 /*   By: junkwak <junkwak@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 17:12:30 by junkwak           #+#    #+#             */
-/*   Updated: 2025/04/03 17:07:14 by junkwak          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:53:45 by junkwak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ int	here_is_strange(char ch)
 	return (0);
 }
 
-void	check_file_name(char *file)
+void	check_file_name(t_game *game, char *file)
 {
 	int	len;
 
 	len = ft_strlen(file);
 	if (ft_strncmp(file + len - 4, ".cub", 4) != 0)
-		show_error("File name is wrong");
+		cleanup_and_exit(game, "File name is wrong\n", 1);
 }
